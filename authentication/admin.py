@@ -1,12 +1,12 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .forms import LITUserCreationForm
+from .forms import LITUserCreationForm, LITUserChangeForm
 from .models import LITUser
 
 
 class CustomUserAdmin(UserAdmin):
 	add_form = LITUserCreationForm
-	form = LITUserCreationForm
+	form = LITUserChangeForm
 	model = LITUser
 	list_display = ["email", "username", "is_staff",]
 	fieldsets = UserAdmin.fieldsets + ((None, {"fields": ("follows",)}),)
