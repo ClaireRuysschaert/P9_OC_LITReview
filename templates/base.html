@@ -4,13 +4,16 @@
     </head>
 	<body>
 		<div>
-			<header>...</header>
+			<header>
+				<h1><a href="{% url 'home' %}">Flux des reviews</a></h1>
+			</header>
 			{% if user.is_authenticated %}
-			<p>Bonjour {{ user.username }} !</p>
-			<p><a href="{% url 'logout' %}">Se déconnecter</a></p>
+				<p>Bonjour {{ user.username }} !</p>
+				<p><a href="{% url 'logout' %}">Se déconnecter</a></p>
 			{% else %}
-			<p>Vous n'êtes pas connectés.</p>
-			<a href="{% url 'login' %}">Se connecter</a>
+				<p>Vous n'êtes pas connectés.</p>
+				<a href="{% url 'login' %}">Se connecter</a>
+				<a href="{% url 'signup' %}">Créer un compte</a>
 			{% endif %}
 			{% block content %}
 			{% endblock content %}
