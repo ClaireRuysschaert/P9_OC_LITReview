@@ -1,12 +1,17 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
 
 {% block content %}
-<h2>S'inscrire</h2>
-{% if form.errors %}
-{{ form.errors }}
-{% endif %}
-<form method="post">{% csrf_token %}
-    {{ form.as_p }}
-<button type="submit">S'inscrire</button>
-</form>
+<div class="d-flex justify-content-center">    
+    <div class="w-70">
+        <h2>S'inscrire</h2>
+        {% if form.errors %}
+        {{ form.errors }}
+        {% endif %}
+        <form method="post">{% csrf_token %}
+            {{ form|crispy }}
+            <button class="btn btn-primary" type="submit">S'inscrire</button>
+        </form>
+    </div>
+</div>
 {% endblock content %}

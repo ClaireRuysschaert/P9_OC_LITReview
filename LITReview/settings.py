@@ -37,6 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # 3rd Party
+    'crispy_forms',
+    'crispy_bootstrap5',
+    #Local
     'authentication',
     'blog',
 ]
@@ -130,3 +134,6 @@ LOGIN_REDIRECT_URL = "home"
 LOGOUT_REDIRECT_URL = LOGIN_URL
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [BASE_DIR / "static"]
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
