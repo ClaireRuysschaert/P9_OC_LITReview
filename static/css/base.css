@@ -1,21 +1,57 @@
+
+/* Variable color */
+:root{
+    --color-light-grey:#fefefe ;
+    --color-light-pink:#aaa0ac;
+    --color-medium-pink:#8d808f;
+    --color-dark-pink:#79677c;
+    --color-dark-grey:#333333;
+}
+
 body {
     font-family: 'Montserrat', sans-serif;
     font-size: 16px;
+    background-color: var(--color-light-grey);
+    padding: 3rem;
 }
 
 header {
-    border-bottom: 2px solid #8a778d;
+    border: 2px solid var(--color-dark-pink);
+    border-radius: 5% 95% 5% 95% / 95% 5% 95% 5% ;
     margin-bottom: 2rem;
+    padding: 1rem;
     display: flex;
 }
 
-a {
+.light-link a {
     text-decoration: none;
+    color: var(--color-dark-pink);
+    font-size: 17px;
+}
+
+.light-link a:hover {
+    text-decoration: underline;
+    color:black;
+    text-decoration-color:var(--color-dark-pink);
+    text-underline-offset: 0.3em;
+    text-decoration-thickness: 0.1em;
+}
+
+.btn-outline-secondary, .btn-primary:hover {
+    color: var(--color-dark-grey);
+    background-color: var(--color-light-grey);
+    border-color: var(--color-dark-pink);
+
+}
+
+.btn-outline-secondary:hover, .btn-primary {
+    color: var(--color-light-grey);
+    background-color: var(--color-dark-pink);
+    border-color: var(--color-dark-pink);
 }
 
 
 header h1 a {
-    color: #8a778d;
     margin: 1rem;
 }
     
