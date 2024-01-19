@@ -17,24 +17,33 @@
   <body>
     <div class="container">
       <header>
-        <div class="w-100 p-3 d-flex align-items-baseline flex-wrap">
-          <div class="m-2 p-2 me-auto light-link"><a href="{% url 'home' %}">Flux des reviews</a></div>
-          {% if user.is_authenticated %}
-          <div class="p-2 me-auto light-link"><a href="#" class="nav-link px-2 link-dark">+ Nouvelle critique</a></div>
-          <div class="px-4"><p>Bonjour, {{ user.username }}</p></div>
-          <div class="p-2"><a href="{% url 'logout' %}" class="btn btn-outline-secondary">Se déconnecter</a></div>
-          {% else %}
-          <div class="p-2"><a href="{% url 'login' %}" class="btn btn-outline-secondary me-2">Se connecter</a></div>
-          <div class="p-2"><a href="{% url 'signup' %}" class="btn btn-primary">Créer un compte</a></div>
-          {% endif %}
+        <div class="w-100 p-3 d-flex align-items-baseline flex-wrap justify-content-between">
+          <div></div>
+          <div class="m-2 p-2 light-link"><a href="{% url 'home' %}"><strong>LITReview</strong></a></div>
+          <div class="d-flex">
+            {% if user.is_authenticated %}
+            <div class="pe-1 light-link"><a href="#" class="nav-link px-2 link-dark">Flux</a></div>
+            <div class="light-link"><a href="#" class="nav-link px-2 link-dark">Posts</a></div>
+            <div class="px-1 light-link"><a href="{% url 'subscription' %}" class="nav-link px-2 link-dark">Abonnements</a></div>
+            <div class=""><a href="{% url 'logout' %}" class="btn btn-outline-secondary">Se déconnecter</a></div>
+            {% else %}
+            <div class="p-2"><a href="{% url 'login' %}" class="btn btn-outline-secondary me-2">Se connecter</a></div>
+            <div class="p-2"><a href="{% url 'signup' %}" class="btn btn-primary">Créer un compte</a></div>
+            {% endif %}
+          </div>
         </div>
       </header>
+
       {% if messages %}
-        <div class="mx-auto w-75 messages p-3 m-5 bg-success rounded" style="--bs-bg-opacity: .4">
-            {% for message in messages %}
-                <div {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
-            {% endfor %}
-        </div>
+      <div class="mx-auto w-75 messages p-3 m-5 rounded" style="--bs-bg-opacity: .4">
+        {% for message in messages %}
+          {% if message.tags %}    
+          <div class="alert {% if message.tags == 'error' %}alert-danger{% else %}alert-success{% endif %}">
+            {{ message }}
+          </div>
+          {% endif %}
+        {% endfor %}
+      </div>
       {% endif %}
       <main>{% block content %} {% endblock content %}</main>
     </div>

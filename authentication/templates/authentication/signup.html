@@ -3,14 +3,17 @@
 
 {% block content %}
 <div class="d-flex justify-content-center">    
-    <div class="w-70">
-        <h2>S'inscrire</h2>
+    <div class="w-70 text-center">
+        <h2 class="p-3 pb-5">Inscrivez-vous</h2>
         {% if form.errors %}
         {{ form.errors }}
         {% endif %}
         <form method="post">{% csrf_token %}
             {{ form|crispy }}
-            <button class="btn btn-primary" type="submit">S'inscrire</button>
+            <div class="text-end pt-4">
+                <button class="btn px-4" type="submit"><a href="{% url 'login' %}" class="px-5 py-2 btn btn-outline-secondary me-2">Se connecter</a></button>
+                <button class="btn btn-primary px-5 py-2" type="submit">S'inscrire</button>
+            </div>
         </form>
     </div>
 </div>
