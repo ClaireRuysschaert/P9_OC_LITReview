@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpRequest
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 from .forms import LITUserCreationForm, UserSearchForm
@@ -41,3 +41,11 @@ def subscription_view(request: HttpRequest):
     followers = user.suivi_par.all()
     context["followers"] = followers
     return render(request, "authentication/subscription.html", context)
+
+@login_required
+def unfollow_user(request: HttpRequest, username: str):
+    user: LITUser = request.user
+    user_to_unfollow = get_object_or_404(LITUser, username__iexact=username)
+    user.follows.remove(user_to_unfollow)
+    messages.success(request, f"Vous ne suivez plus {user_to_unfollow.username}.")
+    return redirect('subscription')
