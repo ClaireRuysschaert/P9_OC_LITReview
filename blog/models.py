@@ -20,7 +20,7 @@ class Ticket(models.Model):
 
     def rezise_image(self):
         image = Image.open(self.image)
-        image.thumbnail((300, 300))
+        image.thumbnail((400, 400))
         image.save(self.image.path)
     
     def save(self, *args, **kwargs):

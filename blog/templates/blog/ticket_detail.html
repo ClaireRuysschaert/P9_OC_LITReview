@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<div class="d-flex justify-content-center">
+    <div class="col-sm-7 px-5 text-center p-4">
+        <p class="description_underline">Titre :</p><h1 class="pb-3">{{ ticket.title }}</h1>
+        <p class="description_underline">Description :</p><p class="pb-3"> {{ ticket.description }}</p>
+        {% if ticket.image %}
+            <img src="{{ ticket.image.url }}" alt="{{ ticket.title }}">
+        {% endif %}
+        <p class="description_underline pt-4">Créé par :</p><p class="pb-3"> {{ ticket.user.username }}</p>
+        <p class="description_underline">Créé le :</p><p class="pb-3"> {{ ticket.created_on }}</p>
+        <p class="description_underline">Dernière mise à jour le :</p><p>{{ ticket.updated_on }}</p>
+    </div>
+</div>
+
+
+{% endblock content %}

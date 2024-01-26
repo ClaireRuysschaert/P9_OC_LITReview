@@ -2,6 +2,7 @@
 /* Variable color */
 :root{
     --color-light-grey:#fefefe ;
+    --color-lighter-pink:#f7f3f7;
     --color-light-pink:#aaa0ac;
     --color-medium-pink:#8d808f;
     --color-dark-pink:#79677c;
@@ -44,12 +45,17 @@ header {
 
 }
 
-.btn-outline-secondary:hover, .btn-primary {
+.btn-outline-secondary:hover, .btn-primary, .btn-outline-info:hover {
     color: var(--color-light-grey);
     background-color: var(--color-dark-pink);
     border-color: var(--color-dark-pink);
 }
 
+.btn-outline-info {
+    color: var(--color-dark-pink);
+    border-color: var(--color-dark-pink);
+    background-color: var(--color-lighter-pink);
+}   
 
 header h1 a {
     margin: 1rem;
@@ -58,4 +64,10 @@ header h1 a {
 h2 {
     font-size: 1.5rem;
     margin-bottom: 1rem;
+}
+
+.description_underline {
+    text-decoration: underline;
+    text-decoration-color:var(--color-dark-pink);
+    text-underline-offset: 0.2em;
 }
