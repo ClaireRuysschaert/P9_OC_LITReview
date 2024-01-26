@@ -49,3 +49,7 @@ def delete_ticket(request: HttpRequest, ticket_id):
         messages.success(request, "Votre ticket a bien été supprimé.")
         return redirect('home')
     return render(request, 'blog/delete_ticket.html', {'ticket': ticket})
+
+def display_all_user_tickets(request: HttpRequest):
+    tickets = Ticket.objects.filter(user=request.user)
+    return render(request, 'blog/display_all_user_tickets.html', {'tickets': tickets})

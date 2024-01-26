@@ -70,4 +70,5 @@ h2 {
     text-decoration: underline;
     text-decoration-color:var(--color-dark-pink);
     text-underline-offset: 0.2em;
+    color: var(--color-dark-pink);
 }
