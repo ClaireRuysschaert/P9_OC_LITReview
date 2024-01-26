@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="d-flex justify-content-center">
+    <div class="col-sm-7 px-5 text-center p-4">
+        <h2 class="pb-4">Supprimer le ticket</h2>
+        <form method="post">
+            {% csrf_token %}
+            <p>Etes-vous sûr de vouloir supprimer le ticket : {{ticket.title}} ?</p>
+            <div class="text-end">
+                <a class="btn btn-primary" href="{% url 'ticket_detail' ticket.id %}">Retourner au ticket</a>
+                <button type="submit" class="btn btn-outline-danger my-4">Oui, supprimer le ticket</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock content %}

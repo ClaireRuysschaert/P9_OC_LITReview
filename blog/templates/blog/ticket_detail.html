@@ -4,6 +4,9 @@
 
 <div class="d-flex justify-content-center">
     <div class="col-sm-7 px-5 text-center p-4">
+        <div class="text-end mt-3 mb-5">
+            <a class="btn btn-primary" href="{% url 'edit_ticket' ticket.id %}">Modifier le ticket</a>
+        </div>
         <p class="description_underline">Titre :</p><h1 class="pb-3">{{ ticket.title }}</h1>
         <p class="description_underline">Description :</p><p class="pb-3"> {{ ticket.description }}</p>
         {% if ticket.image %}
@@ -12,6 +15,9 @@
         <p class="description_underline pt-4">Créé par :</p><p class="pb-3"> {{ ticket.user.username }}</p>
         <p class="description_underline">Créé le :</p><p class="pb-3"> {{ ticket.created_on }}</p>
         <p class="description_underline">Dernière mise à jour le :</p><p>{{ ticket.updated_on }}</p>
+        <div class="text-end mt-3 mb-5">
+            <a class="btn btn-outline-danger" href="{% url 'delete_ticket' ticket.id %}">Supprimer le ticket</a>
+        </div>
     </div>
 </div>
 
