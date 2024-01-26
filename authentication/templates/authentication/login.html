@@ -11,9 +11,6 @@
 		</div>
 		<div class="col-sm-7 px-5 text-center p-4">
 			<h2 class="pb-4">Connectez vous</h2>
-			{% if form.errors %}
-			{{ form.errors }}
-			{% endif %}
 			<form method="post">{% csrf_token %}
 				{{ form|crispy }}
 				<div class="text-end">
