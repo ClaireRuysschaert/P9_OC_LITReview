@@ -1,38 +1,46 @@
-{% extends "base.html" %}
+{% extends "base.html" %} {% block content %}
+<div class="d-flex flex-column justify-content-center align-items-center">
+  <div class="text-center w-75">
+    <h2>Suivre d'autres utilisateurs</h2>
+    <form method="get">
+      {{form.username}}
+      <button type="submit" class="btn btn-primary m-2">Envoyer</button>
+    </form>
 
-{% block content %}
-    <div class="d-flex flex-column justify-content-center align-items-center">
-        <div class="text-center w-75">
-            <h2>Suivre d'autres utilisateurs</h2>
-            <form method="get">
-                {{form.username}}
-                <button type="submit" class="btn btn-primary">Envoyer</button>
-            </form>
+    <h2 class="my-5">Abonnements</h2>
+    {% if following %}
+    <table class="pb-5 table table-striped text-center">
+      {% for user in following %}
+      <tr>
+        <td>{{ user.username }}</td>
+        <td>
+          <form method="post" action="{% url 'unfollow' user.username %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-outline-dark">
+              Se désabonner
+            </button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+    {% else %}
+    <p>Aucun abonnement.</p>
+    {% endif %}
+    <div class="p-3"></div>
 
-            <h2 class="my-5">Abonnements</h2>
-            <table class="pb-5 table table-striped text-center">
-                {% for user in following %}
-                    <tr>
-                        <td>{{ user.username }}</td>
-                        <td>
-                            <form method="post" action="{% url 'unfollow' user.username %}">
-                                {% csrf_token %}
-                                <button type="submit" class="btn btn-outline-dark">Se désabonner</button>
-                            </form>
-                        </td>
-                    </tr>
-                {% endfor %}
-            </table>
-            <div class=p-3></div>
-
-            <h2 class="my-5">Abonnés</h2>
-            <table class="table table-striped text-center">
-                {% for user in followers %}
-                    <tr>
-                        <td>{{ user.username }}</td>
-                    </tr>
-                {% endfor %}
-            </table>
-        </div>
-    </div>
+    <h2 class="my-5">Abonnés</h2>
+    {% if followers %}
+    <table class="table table-striped text-center">
+      {% for user in followers %}
+      <tr>
+        <td>{{ user.username }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+    {% else %}
+    <p>Aucun abonné.</p>
+    {% endif %}
+  </div>
+</div>
 {% endblock %}
