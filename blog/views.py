@@ -3,15 +3,20 @@ from django.contrib import messages
 from django.http import HttpRequest
 from django.shortcuts import get_object_or_404, redirect, render
 from authentication.models import LITUser
+from itertools import chain
 
 from blog.forms import TicketForm, ReviewForm
 from blog.models import Review, Ticket
 
-
-def display_all_user_tickets(request: HttpRequest):
+@login_required
+def user_tickets_reviews(request: HttpRequest):
     user: LITUser = request.user
-    tickets = Ticket.objects.filter(user=user).order_by("-id")
-    return render(request, "blog/display_all_user_tickets.html", {"tickets": tickets})
+    tickets = Ticket.objects.filter(user=user)
+    reviews = Review.objects.filter(user=user)
+    items = sorted(
+        chain(tickets, reviews), key=lambda item: item.created_on, reverse=True
+    )
+    return render(request, "blog/user_tickets_reviews.html", {"items": items})
 
 
 @login_required
@@ -20,7 +25,7 @@ def flux(request: HttpRequest):
     user_tickets = Ticket.objects.filter(user=user).order_by("-id")
     following_users_tickets = Ticket.objects.filter(user__in=user.follows.all()).order_by("-id")
     tickets = user_tickets | following_users_tickets
-    return render(request, "blog/display_all_user_tickets.html", {"tickets": tickets})
+    return render(request, "blog/user_tickets_reviews.html", {"tickets": tickets})
 
 
 @login_required

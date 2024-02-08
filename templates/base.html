@@ -23,7 +23,7 @@
           <div class="d-flex">
             {% if user.is_authenticated %}
             <div class="pe-1 light-link"><a href="{% url 'flux' %}" class="nav-link px-2 link-dark">Flux</a></div>
-            <div class="light-link"><a href="{% url 'display_all_user_tickets' %}" class="nav-link px-2 link-dark">Mes Posts</a></div>
+            <div class="light-link"><a href="{% url 'user_tickets_reviews' %}" class="nav-link px-2 link-dark">Mes Posts</a></div>
             <div class="px-1 light-link"><a href="{% url 'subscription' %}" class="nav-link px-2 link-dark">Abonnements</a></div>
             <div class="px-1"><a href="{% url 'logout' %}" class="btn btn-outline-secondary">Se déconnecter</a></div>
             {% else %}
