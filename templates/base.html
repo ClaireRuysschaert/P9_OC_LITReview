@@ -19,10 +19,10 @@
       <header>
         <div class="w-100 p-3 d-flex align-items-baseline flex-wrap justify-content-between">
           <div></div>
-          <div class="m-2 p-2 light-link"><a href="{% url 'home' %}"><strong>LITReview</strong></a></div>
+          <div class="m-2 p-2 light-link"><a href="{% url 'flux' %}"><strong>LITReview</strong></a></div>
           <div class="d-flex">
             {% if user.is_authenticated %}
-            <div class="pe-1 light-link"><a href="#" class="nav-link px-2 link-dark">Flux</a></div>
+            <div class="pe-1 light-link"><a href="{% url 'flux' %}" class="nav-link px-2 link-dark">Flux</a></div>
             <div class="light-link"><a href="{% url 'display_all_user_tickets' %}" class="nav-link px-2 link-dark">Mes Posts</a></div>
             <div class="px-1 light-link"><a href="{% url 'subscription' %}" class="nav-link px-2 link-dark">Abonnements</a></div>
             <div class="px-1"><a href="{% url 'logout' %}" class="btn btn-outline-secondary">Se déconnecter</a></div>
