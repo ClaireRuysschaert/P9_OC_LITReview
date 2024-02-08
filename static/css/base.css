@@ -72,3 +72,13 @@ h2 {
     text-underline-offset: 0.2em;
     color: var(--color-dark-pink);
 }
+
+.rounded_background {
+    border: var(--color-dark-pink) 1px solid;
+    border-radius: 2rem;
+}
+
+.radio-inline {
+    display: inline-block;
+    margin-right: 10px;
+}

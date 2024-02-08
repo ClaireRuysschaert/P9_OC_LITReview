@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="d-flex justify-content-center">
+    <div class="col-sm-7 px-5 text-center p-4">
+        <h1 class="pb-3">Détail de la critique</h1>
+        <i class="bi bi-star-fill"></i>
+        <p class="description_underline">Titre :</p><h2 class="pb-3">{{ review.title }}</h2>
+        {% comment %} <p class="description_underline">Note :</p><p class="pb-3"> {{ review.rating }}</p>
+        <img src="/images/images/star-fill.svg" alt="Filled Star"> {% endcomment %}
+        <p class="description_underline">Note :</p>
+        <p class="pb-3">
+            {% for i in stars %}
+                <img src="/images/images/star-fill.svg" alt="Filled Star">
+            {% endfor %}
+            {% for i in empty_stars %}
+                <img src="/images/images/empty-star.svg" alt="Empty Star">
+            {% endfor %}
+        </p>
+        <p class="description_underline">Description :</p><p class="pb-3"> {{ review.content }}</p>
+        <p class="description_underline">Créé par :</p><p class="pb-3"> {{ review.user.username }}</p>
+        <p class="description_underline">Créé le :</p><p class="pb-3"> {{ review.created_on }}</p>
+        <p class="description_underline">Dernière mise à jour le :</p><p>{{ review.updated_on }}</p>
+    </div>
+</div>
+
+<div class="d-flex justify-content-center">
+    <div class="col-sm-7 px-5 text-center p-4">
+        <h1 class="pb-3">La demande de review</h1>
+        <p class="description_underline">Titre :</p><h2 class="pb-3">{{ ticket.title }}</h2>
+        <p class="description_underline">Description :</p><p class="pb-3"> {{ ticket.description }}</p>
+        {% if ticket.image %}
+            <img src="{{ ticket.image.url }}" alt="{{ ticket.title }}">
+        {% endif %}
+        <p class="description_underline pt-4">Créé par :</p><p class="pb-3"> {{ ticket.user.username }}</p>
+        <p class="description_underline">Créé le :</p><p class="pb-3"> {{ ticket.created_on }}</p>
+        <p class="description_underline">Dernière mise à jour le :</p><p>{{ ticket.updated_on }}</p>
+    </div>
+</div>
+
+
+{% endblock content %}

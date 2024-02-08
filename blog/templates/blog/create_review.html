@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="border border-dark rounded my-3 p-3">
+    <p>Vous être en train de créer une critique en réponse au ticket ci-dessous:</p>
+    <div class="container text-center w-75">
+        <article class="border border-dark rounded my-3 p-3">
+            <div class="row">
+                <p class="col-6 p-2 rounded_background">{{ ticket.user.username }} a demandé une <a class="description_underline" href="{% url 'ticket_detail' ticket.id %}">critique</a>.</p>  
+                <p class="col-2"></p>
+                <p class="col-4">{{ ticket.created_on }}</p>
+            </div>
+            <div class="row m-3">
+                <h2>{{ ticket.title }}</h2>
+            </div>
+            <div class="row my-3 mx-5">
+                <p>{{ ticket.description }}</p>
+            </div>
+            <div class="row">
+                {% if ticket.image %}
+                    <img class="col-6 mx-auto d-block" src="{{ ticket.image.url }}" alt="{{ ticket.title }}">
+                {% else %}
+                    <img class="col-6 mx-auto d-block" src="/images/images/book_placeholder.png" alt="Placeholder">
+                {% endif %}
+            </div>
+            <div class="row">
+                <p class="col-7"></p>
+                {% if ticket.user == request.user %}
+                    <p class="col-2"><a class="btn btn-outline-secondary" href="{% url 'edit_ticket' ticket.id %}">Modifier</a></p>
+                    <p class="col-3"><a class="btn btn-outline-secondary" href="{% url 'delete_ticket' ticket.id %}">Supprimer</a></p>
+                {% else %}
+                    <p class="col-2"></p>
+
+                {% endif %}
+                </div>
+        </article>
+    </div>
+
+    <div class="container text-center w-75">
+        <article class="border border-dark rounded my-3 p-3">
+            <div class="d-flex justify-content-center">
+                <div class="col-sm-7 px-5 text-center p-4">
+                    <h2 class="pb-4">Créer une review</h2>
+                    <form method="post">
+                        {% csrf_token %}
+                        <p class="mx-5">{{ form.title.label_tag }}</p> 
+                        <p class="mb-5">{{ form.title }}</p>
+                        <p class="mb-4">{{ form.content.label_tag }}</p>
+                        <p class="mb-4">{{ form.content }}</p>
+                        <p class="mx-5">{{ form.rating.label_tag }}</p>
+                        {% for choice in form.rating %}
+                            <div class="radio-inline mb-4">{{ choice }}</div>
+                        {% endfor %}
+                            <button type="submit" class="btn btn-primary my-4">Créer la review</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </article>
+    </div>
+</div>
+{% endblock content %}

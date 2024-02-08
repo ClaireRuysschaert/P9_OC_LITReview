@@ -4,8 +4,8 @@ from django.http import HttpRequest
 from django.shortcuts import get_object_or_404, redirect, render
 from authentication.models import LITUser
 
-from blog.forms import TicketForm
-from blog.models import Ticket
+from blog.forms import TicketForm, ReviewForm
+from blog.models import Review, Ticket
 
 
 def display_all_user_tickets(request: HttpRequest):
@@ -71,3 +71,26 @@ def delete_ticket(request: HttpRequest, ticket_id):
         messages.success(request, "Votre ticket a bien été supprimé.")
         return redirect("flux")
     return render(request, "blog/delete_ticket.html", {"ticket": ticket})
+
+@login_required
+def create_review(request: HttpRequest, ticket_id):
+    ticket = get_object_or_404(Ticket, id=ticket_id)
+    if request.method == "POST":
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            review: Review = form.save(commit=False)
+            review.user = request.user
+            review.ticket = ticket
+            review.save()
+            messages.success(request, f"Votre critique a bien été créée.")
+            return redirect("review_detail", ticket_id=ticket.pk, review_id=review.pk)
+    else:
+        form = ReviewForm()
+    return render(request, "blog/create_review.html", {"form": form, "ticket": ticket})
+
+def review_detail(request, ticket_id, review_id):
+    ticket = get_object_or_404(Ticket, id=ticket_id)
+    review = get_object_or_404(Review, id=review_id)
+    stars = list(range(1, review.rating + 1))
+    empty_stars = list(range(1, 5 - review.rating + 1))
+    return render(request, "blog/review_detail.html", {"ticket": ticket, "review": review, 'stars': stars, 'empty_stars': empty_stars})
