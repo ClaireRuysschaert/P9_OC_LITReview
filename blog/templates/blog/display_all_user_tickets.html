@@ -4,13 +4,26 @@
 <div class="d-flex justify-content-center">
     <div class="col-sm-7 text-center">
 
-        <h1 class="mb-5">Vos Posts</h1>
+        {% if request.resolver_match.url_name != 'flux' %}
+            <h1 class="mb-5">Vos Posts</h1>
+        {% else %}
+            <div class="d-flex justify-content-center">
+                <div class="text-center w-75 my-4">
+                    <a class="mx-4 px-3 btn btn-outline-info" href="{% url 'create_ticket' %}">Créer un ticket</a>
+                    <a class="mx-4 px-3 btn btn-outline-info" href="#">Créer une critique</a>
+                </div>
+            </div>
+        {% endif %}
         <div class="container text-center">
                 {% for ticket in tickets %}
                     <article class="border border-dark rounded my-3 p-3">
                         <div class="row">
-                            <p class="col-6">Vous avez rédigé un <a class="description_underline" href="{% url 'ticket_detail' ticket.id %}">ticket</a>.</p>
-                            <p class="col-2"></p>
+                            {% if ticket.user == request.user %}
+                                <p class="col-6">Vous avez rédigé un <a class="description_underline" href="{% url 'ticket_detail' ticket.id %}">ticket</a>.</p>
+                            {% else %}
+                                <p class="col-6">{{ ticket.user.username }} a rédigé un <a class="description_underline" href="{% url 'ticket_detail' ticket.id %}">ticket</a>.</p>
+                            {% endif %}    
+                                <p class="col-2"></p>
                             <p class="col-4">{{ ticket.created_on }}</p>
                         </div>
                         <div class="row">
@@ -29,7 +42,7 @@
                         </div>
                     </article>
                         {% empty %}
-                            <p>Vous n'avez rédigé aucun ticket.</p>
+                            <p>Vous n'avez rédigé aucun ticket ou critique.</p>
                 {% endfor %}
             </div>
         </div>
