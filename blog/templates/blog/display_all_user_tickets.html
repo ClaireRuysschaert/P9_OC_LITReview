@@ -36,10 +36,11 @@
                         </div>
                         <div class="row">
                             <p class="col-7"></p>
-
-                            <p class="col-2"><a class="btn btn-outline-secondary" href="{% url 'edit_ticket' ticket.id %}">Modifier</a></p>
-                            <p class="col-3"><a class="btn btn-outline-secondary" href="{% url 'delete_ticket' ticket.id %}">Supprimer</a></p>
-                        </div>
+                            {% if ticket.user == request.user %}
+                                <p class="col-2"><a class="btn btn-outline-secondary" href="{% url 'edit_ticket' ticket.id %}">Modifier</a></p>
+                                <p class="col-3"><a class="btn btn-outline-secondary" href="{% url 'delete_ticket' ticket.id %}">Supprimer</a></p>
+                            {% endif %}
+                            </div>
                     </article>
                         {% empty %}
                             <p>Vous n'avez rédigé aucun ticket ou critique.</p>

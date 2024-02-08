@@ -45,6 +45,9 @@ def ticket_detail(request, ticket_id):
 
 def edit_ticket(request: HttpRequest, ticket_id):
     ticket = get_object_or_404(Ticket, id=ticket_id)
+    if ticket.user != request.user:
+        messages.error(request, "You are not authorized to edit this ticket.")
+        return redirect("ticket_detail", ticket_id=ticket.pk)
     if request.method == "POST":
         form = TicketForm(request.POST, request.FILES, instance=ticket)
         if form.is_valid():
@@ -60,6 +63,9 @@ def edit_ticket(request: HttpRequest, ticket_id):
 
 def delete_ticket(request: HttpRequest, ticket_id):
     ticket = get_object_or_404(Ticket, id=ticket_id)
+    if ticket.user != request.user:
+        messages.error(request, "You are not authorized to delete this ticket.")
+        return redirect("ticket_detail", ticket_id=ticket.pk)
     if request.method == "POST":
         ticket.delete()
         messages.success(request, "Votre ticket a bien été supprimé.")
