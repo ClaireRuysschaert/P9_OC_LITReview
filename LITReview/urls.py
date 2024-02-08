@@ -23,6 +23,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("", LoginView.as_view(template_name="authentication/login.html", redirect_authenticated_user=True), name='login'),
     path("logout/", LogoutView.as_view(), name="logout"),
-    path("home/", include("blog.urls")),
+    path("flux/", include("blog.urls")),
     path("", include("authentication.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
