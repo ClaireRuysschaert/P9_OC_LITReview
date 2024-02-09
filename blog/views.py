@@ -50,7 +50,7 @@ def create_ticket(request: HttpRequest):
         form = TicketForm()
     return render(request, "blog/create_ticket.html", {"form": form})
 
-
+@login_required
 def ticket_detail(request, ticket_id):
     ticket = get_object_or_404(Ticket, id=ticket_id)
     return render(request, "blog/ticket_detail.html", {"ticket": ticket})
@@ -91,6 +91,9 @@ def delete_ticket(request: HttpRequest, ticket_id):
 @login_required
 def create_review(request: HttpRequest, ticket_id):
     ticket = get_object_or_404(Ticket, id=ticket_id)
+    if Review.objects.filter(user=request.user, ticket=ticket).exists():
+        messages.error(request, "Vous avez déjà posté une critique pour ce ticket.")
+        return redirect("ticket_detail", ticket_id=ticket.pk)
     if request.method == "POST":
         form = ReviewForm(request.POST)
         if form.is_valid():
@@ -99,12 +102,12 @@ def create_review(request: HttpRequest, ticket_id):
             review.ticket = ticket
             review.save()
             messages.success(request, f"Votre critique a bien été créée.")
-            return redirect("review_detail", ticket_id=ticket.pk, review_id=review.pk)
+            return redirect("review_detail", review_id=review.pk)
     else:
         form = ReviewForm()
     return render(request, "blog/create_review.html", {"form": form, "ticket": ticket})
 
-
+@login_required
 def review_detail(request, review_id):
     review = get_object_or_404(Review, id=review_id)
     ticket = get_object_or_404(Ticket, id=review.ticket.pk)
