@@ -6,7 +6,8 @@ class LITUser(AbstractUser):
     follows = models.ManyToManyField(
         "self",
         symmetrical=False,
-        verbose_name="suit",
-        related_name="suivi_par",
+        related_name="followed_by",
         blank=True,
     )
+    # backwards relationships
+    followed_by: models.QuerySet["LITUser"]

@@ -28,7 +28,7 @@ def flux(request: HttpRequest):
     following_users_tickets = Ticket.objects.filter(user__in=user.follows.all())
     tickets = user_tickets | following_users_tickets
     user_reviews = Review.objects.filter(user=user)
-    followers = user.suivi_par.all()
+    followers = user.followed_by.all()
     followers_reviews = Review.objects.filter(user__in=followers, ticket__user=user)
     reviews = user_reviews | followers_reviews
     items = sorted(

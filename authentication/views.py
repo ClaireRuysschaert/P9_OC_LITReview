@@ -42,7 +42,7 @@ def subscription_view(request: HttpRequest):
             messages.error(request, "Cet utilisateur n'existe pas.")
     following = user.follows.all()
     context["following"] = following  # type: ignore[assignment]
-    followers = user.suivi_par.all()
+    followers = user.followed_by.all()
     context["followers"] = followers  # type: ignore[assignment]
     return render(request, "authentication/subscription.html", context)
 
