@@ -144,7 +144,7 @@ def edit_review(request: HttpRequest, review_id):
             return redirect("review_detail", review_id=review.pk)
     else:
         form = ReviewForm(instance=review)
-    return render(request, "blog/edit_review.html", {"form": form})
+    return render(request, "blog/edit_review.html", {"form": form, "review": review})
 
 
 @login_required
