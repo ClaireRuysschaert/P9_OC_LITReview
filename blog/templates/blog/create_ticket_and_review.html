@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container text-center w-75">
+    <article class="border border-dark rounded my-3 p-3">
+        <div class="d-flex justify-content-center">
+            <div class="col-sm-7 px-5 text-center p-4">
+                <h2 class="pb-4">Créer un ticket et une review</h2>
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <h3 class="pb-4">Ticket</h3>
+                    {{ ticket_form|crispy }}
+                    <div class="border border-dark rounded my-5 "></div>
+                    <h3 class="pb-4">Review</h3>
+                    <p class="mx-5">{{ review_form.title.label_tag }}</p> 
+                    <p class="mb-5">{{ review_form.title }}</p>
+                    <p class="mb-4">{{ review_form.content.label_tag }}</p>
+                    <p class="mb-4">{{ review_form.content }}</p>
+                    <p class="mx-5">{{ review_form.rating.label_tag }}</p>
+                    {% for choice in review_form.rating %}
+                        <div class="radio-inline mb-4">{{ choice }}</div>
+                    {% endfor %}
+                    <button type="submit" class="btn btn-primary my-4">Créer le ticket et la review</button>
+                </form>
+            </div>
+        </div>
+    </article>
+</div>
+{% endblock content %}

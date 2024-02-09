@@ -158,3 +158,28 @@ def delete_review(request: HttpRequest, review_id):
         messages.success(request, "Votre critique a bien été supprimé.")
         return redirect("flux")
     return render(request, "blog/delete_review.html", {"review": review})
+
+
+@login_required
+def create_ticket_and_review(request: HttpRequest):
+    if request.method == "POST":
+        ticket_form = TicketForm(request.POST, request.FILES)
+        review_form = ReviewForm(request.POST)
+        if ticket_form.is_valid() and review_form.is_valid():
+            ticket = ticket_form.save(commit=False)
+            ticket.user = request.user
+            ticket.save()
+            review = review_form.save(commit=False)
+            review.user = request.user
+            review.ticket = ticket
+            review.save()
+            messages.success(request, "Votre ticket et critique ont bien été créés.")
+            return redirect("review_detail", review_id=review.pk)
+    else:
+        ticket_form = TicketForm()
+        review_form = ReviewForm()
+    return render(
+        request,
+        "blog/create_ticket_and_review.html",
+        {"ticket_form": ticket_form, "review_form": review_form},
+    )

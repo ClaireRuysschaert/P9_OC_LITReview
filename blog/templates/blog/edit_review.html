@@ -18,7 +18,7 @@
             <div class="row my-3 mx-5">
                 <p>{{ review.ticket.description }}</p>
             </div>
-            <div class="row">
+            <div class="row mb-4">
                 {% if review.ticket.image %}
                     <img class="col-6 mx-auto d-block" src="{{ review.ticket.image.url }}" alt="{{ review.ticket.title }}">
                 {% else %}

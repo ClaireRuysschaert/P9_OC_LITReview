@@ -19,4 +19,9 @@ urlpatterns = [
     path(
         "review/<int:review_id>/delete/", blog.views.delete_review, name="delete_review"
     ),
+    path(
+        "create_ticket_and_review/",
+        blog.views.create_ticket_and_review,
+        name="create_ticket_and_review",
+    ),
 ]
