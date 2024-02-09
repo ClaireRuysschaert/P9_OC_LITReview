@@ -1,0 +1,21 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="d-flex justify-content-center">
+  <div class="col-sm-7 px-5 text-center p-4">
+    <h2 class="pb-4">Supprimer la critique</h2>
+    <form method="post">
+      {% csrf_token %}
+      <p>Etes-vous sûr de vouloir supprimer la critique : {{review.title}} ?</p>
+      <div>
+        <a class="btn btn-primary" href="{% url 'review_detail' review.id %}"
+          >Retourner à la critique</a
+        >
+        <button type="submit" class="btn btn-outline-danger my-4">
+          Oui, supprimer la critique
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock content %}

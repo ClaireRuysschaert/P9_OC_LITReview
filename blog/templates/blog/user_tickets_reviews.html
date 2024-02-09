@@ -51,7 +51,7 @@
                         <article class="border border-dark rounded my-3 p-3">
                             <div class="row">
                                 {% if item.user == request.user %}
-                                    <p class="col-6">Vous avez rédigé une <a class="description_underline" href="{% url 'review_detail' item.ticket.id item.id %}">critique</a>.</p>
+                                    <p class="col-6">Vous avez rédigé une <a class="description_underline" href="{% url 'review_detail' item.id %}">critique</a>.</p>
                                 {% else %}
                                     <p class="col-6 p-2 rounded_background">{{ item.user.username }} a répondu à votre <a class="description_underline" href="{% url 'ticket_detail' item.ticket.id %}">ticket</a>.</p>
                                 {% endif %}    
@@ -91,6 +91,18 @@
                                     {% endif %}
                                 </div>
                             </div>
+                            
+                            <div class="row">
+                                <p class="col-7"></p>
+                                {% if item.user == request.user %}
+                                    <p class="col-2"><a class="btn btn-outline-secondary" href="{% url 'edit_review' item.id %}">Modifier</a></p>
+                                    <p class="col-3"><a class="btn btn-outline-secondary" href="{% url 'delete_review' item.id %}">Supprimer</a></p>
+                                {% else %}
+                                    <p class="col-2"></p>
+                                    <p class="col-3"><a class="btn btn-primary" href="{% url 'create_review' item.id %}">Répondre</a></p>
+                                {% endif %}
+                            </div>
+
                         </article>
                     {% endif %}
 
