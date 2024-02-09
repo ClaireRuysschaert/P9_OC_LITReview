@@ -2,3 +2,7 @@
 __pycache__/
 db.sqlite3
 images/
+.flake8
+.isort.cfg
+.mypy.ini
+.pre-commit-config.yaml

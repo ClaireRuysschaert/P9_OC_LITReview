@@ -1,5 +1,4 @@
-"""
-WSGI config for LITReview project.
+"""WSGI config for LITReview project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +10,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'LITReview.settings')
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "LITReview.settings")
 
 application = get_wsgi_application()
