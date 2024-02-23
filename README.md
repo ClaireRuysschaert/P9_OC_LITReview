@@ -1,3 +1,5 @@
+# P9 - Développer une application web en utilisant Django
+
 ### Application Goal 
  
 - Request reviews of books or articles by creating tickets
@@ -11,7 +13,7 @@
 # Authentication
 Users can log in, log out, and sign up.
 Unauthenticated users can only access the login and signup pages.
-![Login/Out/Signup Page](images/images/login-out-signup_page.PNG)
+![Login/Out/Signup Page](/static/images/login-out-signup_page.PNG)
 
 
 # Tickets (Review Request from a user)
@@ -29,7 +31,7 @@ The feed displays the following in reverse chronological order :
 - Option to create a review
 - Option to create a ticket and a review at the same time
 - Option to view, modify and delete it's own tickes and reviews
-![](images/images/feed.PNG)
+![](/static/images/feed.PNG)
 
 
 # Subscriptions
@@ -37,7 +39,7 @@ A user can follow other users to see their requests and critiques.
 Users can search for usernames to follow them.
 There is a page listing all the users a user is following and all the users who are following the user. 
 A user can unfollow another user.
-![](images/images/subscription.PNG)
+![](/static/images/subscription.PNG)
 
 
 ### Technical specifications

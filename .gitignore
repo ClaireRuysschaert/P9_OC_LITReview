@@ -1,7 +1,7 @@
 .venv
 __pycache__/
 db.sqlite3
-images/
+images/images
 .flake8
 .isort.cfg
 .mypy.ini
