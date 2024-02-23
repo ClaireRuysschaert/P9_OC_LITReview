@@ -6,3 +6,4 @@ images/
 .isort.cfg
 .mypy.ini
 .pre-commit-config.yaml
+.mypy_cache/

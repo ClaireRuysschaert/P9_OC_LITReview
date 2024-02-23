@@ -166,11 +166,11 @@ def create_ticket_and_review(request: HttpRequest):
         ticket_form = TicketForm(request.POST, request.FILES)
         review_form = ReviewForm(request.POST)
         if ticket_form.is_valid() and review_form.is_valid():
-            ticket = ticket_form.save(commit=False)
-            ticket.user = request.user
+            ticket: Ticket = ticket_form.save(commit=False)
+            ticket.user = request.user  # type: ignore[assignment]
             ticket.save()
-            review = review_form.save(commit=False)
-            review.user = request.user
+            review: Review = review_form.save(commit=False)
+            review.user = request.user  # type: ignore[assignment]
             review.ticket = ticket
             review.save()
             messages.success(request, "Votre ticket et critique ont bien été créés.")
